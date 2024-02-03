@@ -767,6 +767,16 @@
     "@openzeppelin/contracts" "4.7.3"
     "@zk-kit/incremental-merkle-tree.sol" "1.3.3"
 
+"@semaphore-protocol/group@^3":
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/@semaphore-protocol/group/-/group-3.15.2.tgz#31d24b302982fd51760548cdfc0a7df6e3523a75"
+  integrity sha512-amDjSRattdViYUOZs40+4quKm+C1/F1fvyOvng9QGW2kkc138vombltyL4ix0mGSSPuqy/7ToH6wrfGivIfJFw==
+  dependencies:
+    "@ethersproject/bignumber" "^5.7.0"
+    "@ethersproject/bytes" "^5.7.0"
+    "@ethersproject/keccak256" "^5.7.0"
+    "@zk-kit/incremental-merkle-tree" "1.1.0"
+
 "@sentry/core@5.30.0":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/core/-/core-5.30.0.tgz#6b203664f69e75106ee8b5a2fe1d717379b331f3"
@@ -978,6 +988,11 @@
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@zk-kit/incremental-merkle-tree.sol/-/incremental-merkle-tree.sol-1.3.3.tgz#ec091912bd6862e978b7b693fcd35b5004d16017"
   integrity sha512-Tm0MfrKii0JWgYJnyK0U4tlq69SWJemh16Tv3itvW4G2C7BLzgejnBbWomYPPrDHJBDgMDvIKETnb6/w5RLroQ==
+
+"@zk-kit/incremental-merkle-tree@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@zk-kit/incremental-merkle-tree/-/incremental-merkle-tree-1.1.0.tgz#6b0ccce56f9e05ccf73f7ea4fa746d5ef7d24b1d"
+  integrity sha512-WnNR/GQse3lX8zOHMU8zwhgX8u3qPoul8w4GjJ0WDHq+VGJimo7EGheRZ/ILeBQabnlzAerdv3vBqYBehBeoKA==
 
 abbrev@1:
   version "1.1.1"
@@ -1918,7 +1933,7 @@ ethers@^5.7.1, ethers@^5.7.2:
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
 
-ethers@^6.4.0:
+ethers@^6.10.0:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.10.0.tgz#20f3c63c60d59a993f8090ad423d8a3854b3b1cd"
   integrity sha512-nMNwYHzs6V1FR3Y4cdfxSQmNgZsRj1RiTU25JwvnJLmyzw9z3SKxNc2XKDuiXXo/v9ds5Mp9m6HBabgYQQ26tA==
