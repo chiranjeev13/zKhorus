@@ -1,5 +1,6 @@
 import { Group } from "@semaphore-protocol/group";
-import { AlchemyProvider, BrowserProvider, ethers } from "ethers";
+import { abi } from "../artifacts/contracts/zKhorus.sol";
+import { ethers } from "ethers";
 import dotenv from "dotenv";
 const group = new Group(69);
 
@@ -411,13 +412,13 @@ const provider = new ethers.JsonRpcProvider(
 
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
 
-console.log(wallet.address)
+console.log(wallet.address);
 
 const signer = wallet.connect(provider);
 const contractInstance = new ethers.Contract(
-  "0xff782092C9f433686dCE8C21Eec2dCebEbfAE09d",
+  "0x5766e272F6b8406823eDdD38de8465fdffb59ADF",
   abi,
   signer
 );
 
-console.log(await contractInstance.createGroup("69","20","0x5766e272F6b8406823eDdD38de8465fdffb59ADF"));
+console.log(await contractInstance);

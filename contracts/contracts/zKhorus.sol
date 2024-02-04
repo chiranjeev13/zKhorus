@@ -34,8 +34,6 @@ contract zKhorus {
   mapping(uint256 => bool) public completed;
   uint256[] identityCommitments;
 
-  ISemaphore public semaphore;
-
   address public semaphoreAddress;
 
   function checkRegistered() public view returns (bool) {
@@ -62,7 +60,8 @@ contract zKhorus {
     string memory title,
     uint256 timeEnd,
     uint256 depth,
-    uint256 regtime
+    uint256 regtime,
+    uint256 groupId
   ) public {
     require(registered[msg.sender] == true, "Not registered");
     proposals.push(
@@ -82,14 +81,14 @@ contract zKhorus {
       )
     );
     _proposalId++;
-    ISemaphore(semaphoreAddress).createGroup(_proposalId, depth, address(this));
-    ISemaphore(semaphoreAddress).addMembers(_proposalId, identityCommitments);
+    ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
   }
 
-  function joinProposal(uint256 proposalId, uint256 identityCommitment) public {
-    require(proposals[proposalId].status == true, "Not Active");
+  function joinProposal(
+    uint256 proposalId,
+    uint256 identityCommitment
+  ) public {
     require(registered[msg.sender] == true, "Not a member");
-    require(proposals[proposalId].regtime > block.timestamp , "Reg Time over");
     ISemaphore(semaphoreAddress).addMember(proposalId, identityCommitment);
   }
 

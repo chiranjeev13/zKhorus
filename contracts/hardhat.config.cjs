@@ -24,7 +24,7 @@ module.exports = {
       chainId: 80001,
     },
     scrollSepolia: {
-      url: "https://scroll-testnet-public.unifra.io",
+      url: "https://rpc.ankr.com/scroll_sepolia_testnet",
       chainId: 534351,
       accounts: [process.env.PRIVATE_KEY],
     },
@@ -40,7 +40,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: "HCWYWD65RIXPZHT7W72T3TF3649USY9W56",
+    apiKey: "9P38ZVKJTEEGJ2W15G9CFCA37S5CH4XZHT",
     customChains: [
       {
         network: "scrollSepolia",
