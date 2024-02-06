@@ -27,11 +27,14 @@ contract zKhorus {
   Member[] public members;
   Proposals[] public proposals;
 
+
   uint256 public _proposalId = 0;
   uint256 public _memberCount = 0;
+  uint256 public _groupId;
 
   mapping(address => bool) public registered;
   mapping(uint256 => bool) public completed;
+  mapping(uint256 => uint256) public propGroupId;
   uint256[] identityCommitments;
 
   address public semaphoreAddress;
@@ -64,6 +67,9 @@ contract zKhorus {
     uint256 groupId
   ) public {
     require(registered[msg.sender] == true, "Not registered");
+    _proposalId++;
+    _groupId = groupId;
+    propGroupId[_proposalId] = groupId;
     proposals.push(
       Proposals(
         _proposalId,
@@ -78,9 +84,9 @@ contract zKhorus {
         0,
         timeEnd,
         regtime
-      )
+        )
     );
-    _proposalId++;
+    
     ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
   }
 
