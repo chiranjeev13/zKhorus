@@ -24,7 +24,7 @@ module.exports = {
       chainId: 80001,
     },
     scrollSepolia: {
-      url: "https://rpc.ankr.com/scroll_sepolia_testnet",
+      url: "https://sepolia-rpc.scroll.io/",
       chainId: 534351,
       accounts: [process.env.PRIVATE_KEY],
     },

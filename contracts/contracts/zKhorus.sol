@@ -88,6 +88,7 @@ contract zKhorus {
     uint256 proposalId,
     uint256 identityCommitment
   ) public {
+
     require(registered[msg.sender] == true, "Not a member");
     ISemaphore(semaphoreAddress).addMember(proposalId, identityCommitment);
   }
@@ -98,6 +99,7 @@ contract zKhorus {
     uint256 merkleTreeRoot,
     uint256 nullifierHash,
     uint256 externalNullifier,
+    uint256 groupId,
     uint256[8] calldata proof
   ) public {
     require(proposals[proposalId].status == true, "Not Active");
@@ -109,7 +111,7 @@ contract zKhorus {
       proposals[proposalId].totalVotes++;
     }
     ISemaphore(semaphoreAddress).verifyProof(
-      proposalId,
+      groupId,
       merkleTreeRoot,
       vote,
       nullifierHash,

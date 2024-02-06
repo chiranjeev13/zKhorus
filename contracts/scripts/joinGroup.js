@@ -416,7 +416,7 @@ console.log(wallet.address);
 
 const signer = wallet.connect(provider);
 const contractInstance = new ethers.Contract(
-  "0x5766e272F6b8406823eDdD38de8465fdffb59ADF",
+  "0xC0ac0518Eca3bf98c229C9875563230A497e4B8f",
   abi,
   signer
 );
