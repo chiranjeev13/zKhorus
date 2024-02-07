@@ -35,7 +35,7 @@ contract zKhorus {
   mapping(address => bool) public registered;
   mapping(uint256 => bool) public completed;
   mapping(uint256 => uint256) public propGroupId;
-  uint256[] identityCommitments;
+  uint256[] public identityCommitments;
 
   address public semaphoreAddress;
 
@@ -88,6 +88,7 @@ contract zKhorus {
     );
     
     ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
+    ISemaphore(semaphoreAddress).addMembers(groupId,identityCommitments);
   }
 
   function joinProposal(

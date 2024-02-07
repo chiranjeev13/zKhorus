@@ -6,6 +6,8 @@ const abii = require("../artifacts/contracts/zKhorus.sol/zKhorus.json");
 const { ethers } = require("ethers");
 require("dotenv");
 
+
+
 const provider = new ethers.JsonRpcProvider(
   "https://scroll-testnet-public.unifra.io"
 );
@@ -15,7 +17,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
 const abi = abii.abi;
 const signer = wallet.connect(provider);
 const contractInstance = new ethers.Contract(
-  "0xC0ac0518Eca3bf98c229C9875563230A497e4B8f",
+  "0x58ccf56378CD3F6DA35f342E8Ac0De5C9E655C3E",
   abi,
   signer
 );
@@ -31,17 +33,17 @@ async function registerIdentity() {
 
   // // ADD Proposal
 
-  // var time = new Date().getTime().toString();
+  var time = new Date().getTime().toString();
 
-  // const txrr = await contractInstance.addProposal(
-  //   "test",
-  //   time + 10000,
-  //   16,
-  //   time + 2000,
-  //   1315
-  // );
+  const txrr = await contractInstance.addProposal(
+    "test",
+    time + 10000,
+    16,
+    time + 2000,
+    1325
+  );
 
-  // console.log(txrr)
+   console.log(txrr)
 
   // // console.log(await contractInstance._proposalId());
 
@@ -49,28 +51,28 @@ async function registerIdentity() {
   // const f = await contractInstance.joinProposal(1315, identity.commitment);
   // console.log(f)
 
-  const group = new Group(1315, 16);
+  // const group = new Group(1315, 16);
 
-  group.addMember(identity.commitment);
+  // group.addMember(identity.commitment);
 
-  const fullProof = await generateProof(identity, group, group.root, "1", {
-    zkeyFilePath: "./scripts/semaphore.zkey",
-    wasmFilePath: "./scripts/semaphore.wasm",
-  });
+  // const fullProof = await generateProof(identity, group, group.root, "1", {
+  //   zkeyFilePath: "./scripts/semaphore.zkey",
+  //   wasmFilePath: "./scripts/semaphore.wasm",
+  // });
 
-  console.log(fullProof);
+  // console.log(fullProof);
 
-  const txs = await contractInstance.voteOnproposal(
-    "0",
-    "1",
-    fullProof.merkleTreeRoot,
-    fullProof.nullifierHash,
-    fullProof.externalNullifier,
-    "1315",
-    fullProof.proof,
-  );
+  // const txs = await contractInstance.voteOnproposal(
+  //   "0",
+  //   "1",
+  //   fullProof.merkleTreeRoot,
+  //   fullProof.nullifierHash,
+  //   fullProof.externalNullifier,
+  //   "1315",
+  //   fullProof.proof,
+  // );
 
-   console.log(txs);
+  //  console.log(txs);
 }
 
 registerIdentity();
