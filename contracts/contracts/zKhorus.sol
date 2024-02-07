@@ -88,7 +88,6 @@ contract zKhorus {
     );
     
     ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
-    ISemaphore(semaphoreAddress).addMembers(groupId,identityCommitments);
   }
 
   function joinProposal(
