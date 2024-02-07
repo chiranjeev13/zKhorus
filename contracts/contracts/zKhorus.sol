@@ -88,6 +88,7 @@ contract zKhorus {
     );
     
     ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
+    // ISemaphore(semaphoreAddress).addMembers(groupId,identityCommitments);
   }
 
   function joinProposal(
@@ -96,7 +97,7 @@ contract zKhorus {
   ) public {
 
     require(registered[msg.sender] == true, "Not a member");
-    ISemaphore(semaphoreAddress).addMember(proposalId, identityCommitment);
+    ISemaphore(semaphoreAddress).addMember(propGroupId[proposalId], identityCommitment);
   }
 
   function voteOnproposal(
