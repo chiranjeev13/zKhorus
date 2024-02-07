@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@semaphore-protocol/group": "^3",
+    "@semaphore-protocol/identity": "^3",
+    "@semaphore-protocol/proof": "^3",
+    "axios": "^1.6.7",
     "ethers": "^5.4.0",
     "next": "14.1.0",
     "react": "^18",

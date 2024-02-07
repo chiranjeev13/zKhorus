@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
-import  { Account } from "./index";
+import AppProvider from "./appConfig";
 
 export default function App({ Component, pageProps }) {
   return (
-    <Account.Provider>
+    <AppProvider>
       <Component {...pageProps} />
-    </Account.Provider>
+    </AppProvider>
   );
 }

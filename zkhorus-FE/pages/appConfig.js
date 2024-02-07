@@ -9,6 +9,9 @@ export default function AppProvider({ children }) {
   const [providerConnected, setProviderConnected] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
+  const [error, setError] = useState("");
+
+  const contractAddress = "0xF355df8e79b49bFCC1d7617487BDC5e2FF342819"
 
 
   const requestAccount = async () => {
@@ -55,6 +58,7 @@ export default function AppProvider({ children }) {
           connectWallet,
           providerConnected,
           walletAddress,
+          contractAddress
         }}
       >
         {children}
