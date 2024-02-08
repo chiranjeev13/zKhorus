@@ -17,11 +17,7 @@ const wallet = new ethers.Wallet(process.env.PRIVATE_KEY);
 const abi = abii.abi;
 const signer = wallet.connect(provider);
 const contractInstance = new ethers.Contract(
-<<<<<<< HEAD
   "0xF355df8e79b49bFCC1d7617487BDC5e2FF342819",
-=======
-  "0x58ccf56378CD3F6DA35f342E8Ac0De5C9E655C3E",
->>>>>>> 5559a69c3fd9f146936834aae28af8e791c71c78
   abi,
   signer
 );

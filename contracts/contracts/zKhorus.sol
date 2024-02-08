@@ -39,6 +39,10 @@ contract zKhorus {
 
   address public semaphoreAddress;
 
+  function identityList() public view returns (uint256[] memory) {
+    return identityCommitments;
+  }
+
   function checkRegistered() public view returns (bool) {
     return registered[msg.sender];
   }
@@ -88,20 +92,11 @@ contract zKhorus {
     );
     
     ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
-<<<<<<< HEAD
-    // ISemaphore(semaphoreAddress).addMembers(groupId,identityCommitments);
-=======
-    ISemaphore(semaphoreAddress).addMembers(groupId,identityCommitments);
->>>>>>> 5559a69c3fd9f146936834aae28af8e791c71c78
   }
 
-  function joinProposal(
-    uint256 proposalId,
-    uint256 identityCommitment
-  ) public {
-
+  function joinProposal(uint256[] calldata identityCommitments) public {
     require(registered[msg.sender] == true, "Not a member");
-    ISemaphore(semaphoreAddress).addMember(propGroupId[proposalId], identityCommitment);
+    ISemaphore(semaphoreAddress).addMembers(_groupId,identityCommitments);
   }
 
   function voteOnproposal(
