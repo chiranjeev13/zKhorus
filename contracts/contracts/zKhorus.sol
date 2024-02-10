@@ -7,6 +7,7 @@ contract zKhorus {
   struct Member {
     uint256 member_id;
     address member_address;
+    uint256 time_joined;
   }
 
   struct Proposals {
@@ -39,6 +40,7 @@ contract zKhorus {
 
   address public semaphoreAddress;
 
+
   function identityList() public view returns (uint256[] memory) {
     return identityCommitments;
   }
@@ -58,7 +60,7 @@ contract zKhorus {
   function register(uint256 identityCommitment) public {
     require(registered[msg.sender] == false, "Already Registered");
     _memberCount++;
-    members.push(Member(_memberCount, msg.sender));
+    members.push(Member(_memberCount, msg.sender,block.timestamp));
     registered[msg.sender] = true;
     identityCommitments.push(identityCommitment);
   }

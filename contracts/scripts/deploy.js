@@ -8,7 +8,6 @@ async function main() {
   ]);
 
   await lock.waitForDeployment();
-
   console.log(lock.target);
 }
 

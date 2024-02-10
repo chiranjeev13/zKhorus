@@ -3,7 +3,6 @@ import styles from "../styles/Dashboard.module.css";
 import { Account } from "./appConfig";
 import { Identity } from "@semaphore-protocol/identity";
 import { ethers } from "ethers";
-import axios from "axios";
 import moment from "moment";
 import Link from "next/link";
 
@@ -14,6 +13,7 @@ function Dashboard() {
     connectWallet,
     proposalData,
     AddProposal,
+    VoteOnproposal,
   } = useContext(Account);
 
   return (
@@ -49,15 +49,16 @@ function Dashboard() {
                 <p>Proposal Title - {proposal[1]}</p>
                 <div className={styles.votes}>
                   <button
-                    onClick={(e) =>
-                      voteByUser(parseInt(proposal[0]._hex), proposal[1], 1, e)
+                    onClick={
+                      (e) => VoteOnproposal(parseInt(proposal[0]._hex), 1)
+                      //voteByUser(parseInt(proposal[0]._hex), proposal[1], 1, e)
                     }
                   >
                     Yes
                   </button>
                   <button
-                    onClick={(e) =>
-                      voteByUser(parseInt(proposal[0]._hex), proposal[1], 0, e)
+                    onClick={
+                      () => VoteOnproposal(parseInt(proposal[0]._hex), 0)
                     }
                   >
                     No

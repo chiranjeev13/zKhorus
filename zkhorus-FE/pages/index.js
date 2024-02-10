@@ -1,9 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
-import { ethers } from "ethers";
 import styles from "../styles/HomePage.module.css";
 import React, { useState, useContext, createContext } from "react";
-import abi from "../public/abi.json";
 import Link from "next/link";
 import { Account } from "./appConfig";
 

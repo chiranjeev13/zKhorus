@@ -2,7 +2,11 @@
 import { ethers } from "ethers";
 import React, { useState, useContext, createContext, useEffect } from "react";
 import abi from "../public/abi.json";
-import moment, { unix } from "moment";
+import moment from "moment";
+import axios from "axios";
+import { Identity } from "@semaphore-protocol/identity";
+import { Group } from "@semaphore-protocol/group";
+const Proof = require("@semaphore-protocol/proof");
 
 export const Account = createContext();
 
@@ -12,8 +16,8 @@ export default function AppProvider({ children }) {
   const [walletAddress, setWalletAddress] = useState("");
   const [error, setError] = useState("");
   const [proposalData, setProposalData] = useState([]);
-
-  const contractAddress = "0x6bB302f969D33F56C1481a1d71117bE1B0eea754";
+  const ABI = abi.abi;
+  const contractAddress = "0x4dbdf9CF773de1A71D39f02f1Be66860393abBBC";
 
   const requestAccount = async () => {
     const accns = await window.ethereum.request({
@@ -67,14 +71,57 @@ export default function AppProvider({ children }) {
     return Registered;
   };
 
+  const VoteOnproposal = async (proposalId, vote) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const digest = await axios.get(
+      `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${await signer.getAddress()}`
+    );
+    const tsx = digest.data.hash;
+    const identity = new Identity(tsx);
+    const newsignedContract = new ethers.Contract(contractAddress, ABI, signer);
+
+    const groupId = await newsignedContract.propGroupId(proposalId);
+    const identityCommitments = await newsignedContract.identityList();
+    var arr = [];
+    identityCommitments.map((id) => {
+      arr.push(BigInt(id._hex));
+    });
+    console.log(groupId);
+    const group = new Group(groupId, 16, arr);
+
+    const fullProof = await Proof.generateProof(
+      identity,
+      group,
+      group.root,
+      vote
+    );
+    console.log(fullProof.merkleTreeRoot);
+    console.log(fullProof.nullifierHash);
+    console.log(fullProof.externalNullifier);
+    console.log(fullProof.proof);
+    console.log(proposalId, vote);
+    console.log(parseInt(group.id));
+
+    await newsignedContract.voteOnproposal(
+      proposalId - 1,
+      vote,
+      fullProof.merkleTreeRoot,
+      fullProof.nullifierHash,
+      fullProof.externalNullifier,
+      parseInt(group.id),
+      fullProof.proof,
+    );
+    
+  };
+
   const AddProposal = async (title, endtime) => {
-    const ABI = abi.abi;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const newsignedContract = new ethers.Contract(contractAddress, ABI, signer);
     var groupId = await newsignedContract._groupId();
     groupId++;
-    console.log(groupId)
+    console.log(groupId);
     await newsignedContract.addProposal(
       title,
       endtime,
@@ -101,6 +148,7 @@ export default function AppProvider({ children }) {
           contractAddress,
           proposalData,
           AddProposal,
+          VoteOnproposal,
         }}
       >
         {children}

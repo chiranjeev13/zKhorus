@@ -33,16 +33,6 @@ async function registerIdentity() {
 
   // // ADD Proposal
 
-<<<<<<< HEAD
-  // var time = new Date().getTime().toString()
-  // const txrr = await contractInstance.addProposal(
-  //   "test",
-  //   time + 10000,
-  //   16,
-  //   time + 2000,
-  //   1032
-  // );
-=======
   var time = new Date().getTime().toString();
 
   const txrr = await contractInstance.addProposal(
@@ -52,7 +42,6 @@ async function registerIdentity() {
     time + 2000,
     1325
   );
->>>>>>> 5559a69c3fd9f146936834aae28af8e791c71c78
 
    console.log(txrr)
 
@@ -62,11 +51,7 @@ async function registerIdentity() {
   // const f = await contractInstance.joinProposal(1, identity.commitment);
   // console.log(f)
 
-<<<<<<< HEAD
   // const group = new Group(1032, 16);
-=======
-  // const group = new Group(1315, 16);
->>>>>>> 5559a69c3fd9f146936834aae28af8e791c71c78
 
   // group.addMember(identity.commitment);
 
@@ -83,19 +68,16 @@ async function registerIdentity() {
   //   fullProof.merkleTreeRoot,
   //   fullProof.nullifierHash,
   //   fullProof.externalNullifier,
-<<<<<<< HEAD
   //   "1032",
   //   fullProof.proof,
   // );
 
   console.log(txs);
-=======
   //   "1315",
   //   fullProof.proof,
   // );
 
   //  console.log(txs);
->>>>>>> 5559a69c3fd9f146936834aae28af8e791c71c78
 }
 
 registerIdentity();
