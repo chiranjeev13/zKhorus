@@ -6,13 +6,15 @@ import { Identity } from "@semaphore-protocol/identity";
 import { ethers } from "ethers";
 import axios from "axios";
 
-const registerr = async (contractAddress) => {
+const registerr = async (contractAddress, walletAddress) => {
   const ABI = abi.abi;
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
+  console.log(walletAddress);
   const digest = await axios.get(
-    `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${await signer.getAddress()}`
+    `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${walletAddress}`
   );
+
   console.log(digest.data.hash);
   const tsx = digest.data.hash;
   const identity = new Identity(tsx);
@@ -48,7 +50,7 @@ function RegistrationPage() {
       </div>
       <button
         className={styles.submitButton}
-        onClick={() => registerr(contractAddress)}
+        onClick={() => registerr(contractAddress, walletAddress)}
       >
         Submit
       </button>

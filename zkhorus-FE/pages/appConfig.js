@@ -1,7 +1,7 @@
 "use client";
 import { ethers } from "ethers";
 import React, { useState, useContext, createContext, useEffect } from "react";
-import abi from "../public/abi.json";
+import abi from "../../contracts/artifacts/contracts/zKhorus.sol/zkhorus.json";
 import moment from "moment";
 import axios from "axios";
 import { Identity } from "@semaphore-protocol/identity";
@@ -17,7 +17,7 @@ export default function AppProvider({ children }) {
   const [error, setError] = useState("");
   const [proposalData, setProposalData] = useState([]);
   const ABI = abi.abi;
-  const contractAddress = "0x4dbdf9CF773de1A71D39f02f1Be66860393abBBC";
+  const contractAddress = "0x65053324F7dce72108B8657AFa1b10D957a5bD82";
 
   const requestAccount = async () => {
     const accns = await window.ethereum.request({
@@ -110,9 +110,8 @@ export default function AppProvider({ children }) {
       fullProof.nullifierHash,
       fullProof.externalNullifier,
       parseInt(group.id),
-      fullProof.proof,
+      fullProof.proof
     );
-    
   };
 
   const AddProposal = async (title, endtime) => {
@@ -122,13 +121,19 @@ export default function AppProvider({ children }) {
     var groupId = await newsignedContract._groupId();
     groupId++;
     console.log(groupId);
-    await newsignedContract.addProposal(
+    if(groupId === 1)
+    {
+      groupId = 2314;
+    }
+    const tx = await newsignedContract.addProposal(
       title,
       endtime,
       "16",
       moment().unix(),
       groupId
     );
+    await tx.wait();
+
     const identityCommitments = await newsignedContract.identityList();
     var arr = [];
     identityCommitments.map((id) => {
