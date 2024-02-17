@@ -39,6 +39,15 @@ function Dashboard() {
       </Link>
       <div className={styles.userInfo}></div>
       <h1 className={styles.title}>Dashboard</h1>
+      <div className={styles.userInfo}>UNIVERSAL RELAYER ADDRESS</div>
+      <a
+        className={styles.wallet}
+        href="https://sepolia.scrollscan.com/address/0x82c65626C032Fd234875047557404d9e9b603012"
+        target="_blank"
+      >
+        0x82c65626C032Fd234875047557404d9e9b603012
+      </a>
+
       <div className={styles.proposalGrid}>
         <section className={styles.activeProposalSection}>
           {proposalData
@@ -57,8 +66,8 @@ function Dashboard() {
                     Yes
                   </button>
                   <button
-                    onClick={
-                      () => VoteOnproposal(parseInt(proposal[0]._hex), 0)
+                    onClick={() =>
+                      VoteOnproposal(parseInt(proposal[0]._hex), 0)
                     }
                   >
                     No

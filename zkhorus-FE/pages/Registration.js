@@ -1,23 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../styles/RegistrationPage.module.css";
 import { Account } from "./appConfig";
-import abi from "../public/abi.json";
+import abi from "../../contracts/artifacts/contracts/zKhorus.sol/zkhorus.json";
 import { Identity } from "@semaphore-protocol/identity";
 import { ethers } from "ethers";
 import axios from "axios";
 
-const registerr = async (contractAddress, walletAddress) => {
+const registerr = async (contractAddress) => {
+  const [identityCommitment, setIdentityCommitment] = useState();
   const ABI = abi.abi;
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
-  console.log(walletAddress);
   const digest = await axios.get(
-    `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${walletAddress}`
+    `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${await signer.getAddress()}`
   );
 
   console.log(digest.data.hash);
   const tsx = digest.data.hash;
   const identity = new Identity(tsx);
+  setIdentityCommitment(identity.commitment);
   const newsignedContract = new ethers.Contract(contractAddress, ABI, signer);
   const Registered = await newsignedContract.register(identity.commitment);
   console.log(Registered);
@@ -54,6 +55,7 @@ function RegistrationPage() {
       >
         Submit
       </button>
+      <
     </div>
   );
 }
