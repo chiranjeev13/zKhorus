@@ -6,14 +6,11 @@ const abi = require("../../../contracts/artifacts/contracts/zKhorus.sol/zkhorus.
 export default async function handler(req, res) {
   var { fullProof, proposalId, vote, groupId, contractAddress } = req.query;
 
-  const a = "54WiU9XNzk1qrSLJyBtKnyLbUhv2Rk9w";
-  const b = "3H6av5VZnFGS6sFF8FxYbb5wg72zoeHpNTsdwfHQgzp6BNz9XesrWt9FNk1MGmUX";
   const client = new Defender({
-    apiKey: "5aLVb8hP2HpAxB37hoS5jJricBMqJ8En",
-    apiSecret:
-      "3H6av5VZnFGS6sFF8FxYbb5wg72zoeHpNTsdwfHQgzp6BNz9XesrWt9FNk1MGmUX",
-    relayerApiKey: a,
-    relayerApiSecret: b,
+    apiKey: process.env.apiKey,
+    apiSecret: process.env.relayerApiSecret,
+    relayerApiKey: process.env.relayerApiKey,
+    relayerApiSecret: process.env.relayerApiSecret,
   });
 
   try {
