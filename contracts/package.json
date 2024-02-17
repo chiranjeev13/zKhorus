@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "@openzeppelin/defender-sdk": "1.7.0",
     "@semaphore-protocol/contracts": "^3",
     "@semaphore-protocol/group": "^3",
     "@semaphore-protocol/identity": "^3",

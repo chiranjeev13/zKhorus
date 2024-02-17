@@ -7,7 +7,6 @@ import axios from "axios";
 import { Identity } from "@semaphore-protocol/identity";
 import { Group } from "@semaphore-protocol/group";
 const Proof = require("@semaphore-protocol/proof");
-
 export const Account = createContext();
 
 export default function AppProvider({ children }) {
@@ -17,13 +16,12 @@ export default function AppProvider({ children }) {
   const [error, setError] = useState("");
   const [proposalData, setProposalData] = useState([]);
   const ABI = abi.abi;
-  const contractAddress = "0x65053324F7dce72108B8657AFa1b10D957a5bD82";
+  const contractAddress = "0x17Ef06d4dB9CC7f69d0E1157214E0337e17f7B96";
 
   const requestAccount = async () => {
     const accns = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-    console.log(accns);
     setProviderConnected(true);
     setWalletAddress(accns[0]);
   };
@@ -67,7 +65,6 @@ export default function AppProvider({ children }) {
     const Registered = await newsignedContract.registered(
       await signer.getAddress()
     );
-    console.log(Registered);
     return Registered;
   };
 
@@ -87,8 +84,9 @@ export default function AppProvider({ children }) {
     identityCommitments.map((id) => {
       arr.push(BigInt(id._hex));
     });
-    console.log(groupId);
-    const group = new Group(groupId, 16, arr);
+
+    const group = new Group(groupId._hex, 16);
+    group.addMember(arr);
 
     const fullProof = await Proof.generateProof(
       identity,
@@ -96,22 +94,23 @@ export default function AppProvider({ children }) {
       group.root,
       vote
     );
-    console.log(fullProof.merkleTreeRoot);
-    console.log(fullProof.nullifierHash);
-    console.log(fullProof.externalNullifier);
-    console.log(fullProof.proof);
-    console.log(proposalId, vote);
-    console.log(parseInt(group.id));
 
-    await newsignedContract.voteOnproposal(
-      proposalId - 1,
-      vote,
-      fullProof.merkleTreeRoot,
-      fullProof.nullifierHash,
-      fullProof.externalNullifier,
-      parseInt(group.id),
-      fullProof.proof
+    await axios.get(
+      `http://localhost:3000/api/relayer?fullProof=${JSON.stringify(
+        fullProof
+      )}&proposalId=${proposalId}&vote=${vote}&groupId=${parseInt(
+        group.id
+      )}&contractAddress=${contractAddress}`
     );
+
+    const tx = await axios.post(`http://localhost:3000/api/relayer/`, {
+      fullProof,
+      proposalId,
+      vote,
+      group,
+      contractAddress,
+    });
+    console.log(tx);
   };
 
   const AddProposal = async (title, endtime) => {
@@ -121,9 +120,8 @@ export default function AppProvider({ children }) {
     var groupId = await newsignedContract._groupId();
     groupId++;
     console.log(groupId);
-    if(groupId === 1)
-    {
-      groupId = 2314;
+    if (groupId === 1) {
+      groupId = 1109;
     }
     const tx = await newsignedContract.addProposal(
       title,
@@ -139,6 +137,7 @@ export default function AppProvider({ children }) {
     identityCommitments.map((id) => {
       arr.push(BigInt(id._hex));
     });
+    console.log(arr);
     await newsignedContract.joinProposal(arr);
   };
 
