@@ -2,10 +2,18 @@
 
 zKhorus is a DAO that uses zero-knowledge proofs to ensure voter anonymity and natural language processing (NLP) for sentiment analysis to allow users to vote on proposals even if they cannot participate directly. This ensures ***100% privacy and 100% participation in the DAO.***
 
-![Logo](./assets/zKhorus-logo01.png)
+<center>
+  ![Logo](./assets/zKhorus-logo01.png)
+</center>
+
 
 # How it works
-![Flowchart](./assets/zKhorus Flowchart.jpg)
+
+<center>
+  ![Flowchart](./assets/zKhorus_Flowchart.jpg)
+</center>
+
+
 The system is broken down into the following steps:
 
 ### 1. Authentication Module
