@@ -16,7 +16,7 @@ export default function AppProvider({ children }) {
   const [error, setError] = useState("");
   const [proposalData, setProposalData] = useState([]);
   const ABI = abi.abi;
-  const contractAddress = "0x53cBC4A6Cad580CADa55484D311F18c103e2F371";
+  const contractAddress = "0xA4459B6E18BABE9Ac66dFBC43371892B84316616";
 
   const requestAccount = async () => {
     const accns = await window.ethereum.request({
@@ -122,7 +122,7 @@ export default function AppProvider({ children }) {
     groupId++;
     console.log(groupId);
     if (groupId === 1) {
-      groupId = 1564;
+      groupId = 1566;
     }
     const tx = await newsignedContract.addProposal(
       title,
