@@ -95,22 +95,23 @@ export default function AppProvider({ children }) {
       vote
     );
 
-    await axios.get(
-      `http://localhost:3000/api/relayer?fullProof=${JSON.stringify(
-        fullProof
-      )}&proposalId=${proposalId}&vote=${vote}&groupId=${parseInt(
-        group.id
-      )}&contractAddress=${contractAddress}`
-    );
-
-    const tx = await axios.post(`http://localhost:3000/api/relayer/`, {
-      fullProof,
-      proposalId,
-      vote,
-      group,
-      contractAddress,
-    });
-    console.log(tx);
+    try {
+      const tx = await axios.get(
+        `http://localhost:3000/api/relayer?fullProof=${JSON.stringify(
+          fullProof
+        )}&proposalId=${proposalId}&vote=${vote}&groupId=${parseInt(
+          group.id
+        )}&contractAddress=${contractAddress}`
+      );
+      if (
+        window.confirm("VOTE CONFIRMED VIA zkPs.Click Ok to view the Reciept")
+      ) {
+        console.log(tx.data);
+        window.location.href = `https://sepolia.scrollscan.com/tx/${tx.data.hash}`;
+      }
+    } catch (error) {
+      alert(error.response.data.reason);
+    }
   };
 
   const AddProposal = async (title, endtime) => {
@@ -130,8 +131,8 @@ export default function AppProvider({ children }) {
       moment().unix(),
       groupId
     );
+    alert("Wait for Another tx for Adding Identity Commitments");
     await tx.wait();
-
     const identityCommitments = await newsignedContract.identityList();
     var arr = [];
     identityCommitments.map((id) => {
@@ -139,6 +140,7 @@ export default function AppProvider({ children }) {
     });
     console.log(arr);
     await newsignedContract.joinProposal(arr);
+    window.location.assign("/Dashboard");
   };
 
   return (

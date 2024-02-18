@@ -20,14 +20,15 @@ const AddProposal = () => {
   const handleDateTimeChange = (date) => {
     setSelectedDateTime(date);
   };
-  console.log(moment(selectedDateTime).unix());
+
+  console.log();
 
   const addProposal = async () => {
-    const time = Math.abs(moment().unix() - moment(selectedDateTime).unix());
+    const time = moment(selectedDateTime).unix();
     try {
       await AddProposal(title, time);
     } catch (error) {
-      console.log(error);
+      alert(error.error.data.message);
     }
   };
 
@@ -57,12 +58,11 @@ const AddProposal = () => {
         <p>Proposal Title</p>
         <input type="text" onChange={(e) => setTitle(e.target.value)} />
 
-        <div>
           <DateTimePicker
+            className={styles.date}
             onChange={handleDateTimeChange}
             value={selectedDateTime}
           />
-        </div>
 
         <button onClick={() => addProposal()}>Create New Proposal</button>
       </div>

@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../styles/Dashboard.module.css";
 import { Account } from "./appConfig";
-import { Identity } from "@semaphore-protocol/identity";
-import { ethers } from "ethers";
 import moment from "moment";
 import Link from "next/link";
 
@@ -15,6 +13,8 @@ function Dashboard() {
     AddProposal,
     VoteOnproposal,
   } = useContext(Account);
+
+  console.log(proposalData);
 
   return (
     <div className={styles.container}>
@@ -37,16 +37,19 @@ function Dashboard() {
       <Link className={styles.addProposalBtn} href="/AddProposal">
         Add Proposal
       </Link>
-      <div className={styles.userInfo}></div>
-      <h1 className={styles.title}>Dashboard</h1>
-      <div className={styles.userInfo}>UNIVERSAL RELAYER ADDRESS</div>
-      <a
-        className={styles.wallet}
-        href="https://sepolia.scrollscan.com/address/0x82c65626C032Fd234875047557404d9e9b603012"
-        target="_blank"
-      >
-        0x82c65626C032Fd234875047557404d9e9b603012
-      </a>
+
+      <div className={styles.fix}>
+        <div className={styles.userInfo}></div>
+        <h1 className={styles.title}>zKhorus Dashboard</h1>
+        <div className={styles.userInfo}>UNIVERSAL RELAYER ADDRESS</div>
+        <a
+          className={styles.wallet}
+          href="https://sepolia.scrollscan.com/address/0x82c65626C032Fd234875047557404d9e9b603012"
+          target="_blank"
+        >
+          0x82c65626C032Fd234875047557404d9e9b603012
+        </a>
+      </div>
 
       <div className={styles.proposalGrid}>
         <section className={styles.activeProposalSection}>
@@ -58,9 +61,8 @@ function Dashboard() {
                 <p>Proposal Title - {proposal[1]}</p>
                 <div className={styles.votes}>
                   <button
-                    onClick={
-                      (e) => VoteOnproposal(parseInt(proposal[0]._hex), 1)
-                      //voteByUser(parseInt(proposal[0]._hex), proposal[1], 1, e)
+                    onClick={(e) =>
+                      VoteOnproposal(parseInt(proposal[0]._hex), 1)
                     }
                   >
                     Yes
@@ -86,13 +88,10 @@ function Dashboard() {
                   </p>
                   <p>
                     Time Left From Initiation :{" "}
+                    {console.log(parseInt(proposal[10]._hex))}
                     {moment
-                      .utc(
-                        moment
-                          .duration(parseInt(proposal[10]._hex), "seconds")
-                          .asMilliseconds()
-                      )
-                      .format("HH:mm:ss")}
+                      .unix(parseInt(proposal[10]._hex))
+                      .format("YYYY-MM-DD HH:mm:ss")}
                   </p>
                 </div>
               </div>
