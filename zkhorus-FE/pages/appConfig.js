@@ -122,7 +122,7 @@ export default function AppProvider({ children }) {
     groupId++;
     console.log(groupId);
     if (groupId === 1) {
-      groupId = 1109;
+      groupId = 1562;
     }
     const tx = await newsignedContract.addProposal(
       title,
