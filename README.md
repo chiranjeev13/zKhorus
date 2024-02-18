@@ -4,7 +4,10 @@ zKhorus is a DAO that uses zero-knowledge proofs to ensure voter anonymity and n
 
 ![Logo](./assets/zKhorus-logo01.png)
 
+## Contract Addresses
+- 0x1CD125512a423d031DE105A88b4815f035E77375
 
+To access the website properly make sure you are on Scroll Sepolia
 
 # How it works
 
