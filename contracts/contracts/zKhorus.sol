@@ -32,6 +32,7 @@ contract zKhorus {
   uint256 public _proposalId = 0;
   uint256 public _memberCount = 0;
   uint256 public _groupId;
+  uint256 public ver = 1;
 
   mapping(address => bool) public registered;
   mapping(uint256 => bool) public completed;
