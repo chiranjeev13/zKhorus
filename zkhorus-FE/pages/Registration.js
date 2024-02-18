@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../styles/RegistrationPage.module.css";
 import { Account } from "./appConfig";
-import abi from "../../contracts/artifacts/contracts/zKhorus.sol/zkhorus.json";
+import abi from "../zKhorus.json"
 import { Identity } from "@semaphore-protocol/identity";
 import { ethers } from "ethers";
 import axios from "axios";

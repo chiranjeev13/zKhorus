@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Defender } = require("@openzeppelin/defender-sdk");
 const { ethers } = require("ethers");
-const abi = require("../../../contracts/artifacts/contracts/zKhorus.sol/zkhorus.json");
+const abi = require("../../zKhorus.json");
 
 export default async function handler(req, res) {
   var { fullProof, proposalId, vote, groupId, contractAddress } = req.query;

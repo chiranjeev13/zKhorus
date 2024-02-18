@@ -1,7 +1,7 @@
 "use client";
 import { ethers } from "ethers";
 import React, { useState, useContext, createContext, useEffect } from "react";
-import abi from "../../contracts/artifacts/contracts/zKhorus.sol/zkhorus.json";
+import abi from "../zKhorus.json";
 import moment from "moment";
 import axios from "axios";
 import { Identity } from "@semaphore-protocol/identity";
