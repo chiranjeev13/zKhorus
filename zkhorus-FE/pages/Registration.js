@@ -57,7 +57,7 @@ function RegistrationPage() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const digest = await axios.get(
-      `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${await signer.getAddress()}`
+      `https://zkhorus-api-service.vercel.app/api/identitycommitment?wallet=${walletAddress}`
     );
     console.log(digest.data.hash);
     const tsx = digest.data.hash;

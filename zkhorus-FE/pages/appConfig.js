@@ -16,7 +16,7 @@ export default function AppProvider({ children }) {
   const [error, setError] = useState("");
   const [proposalData, setProposalData] = useState([]);
   const ABI = abi.abi;
-  const contractAddress = "0x17Ef06d4dB9CC7f69d0E1157214E0337e17f7B96";
+  const contractAddress = "0x20C4D97D3382803AaB135aDaaA58D26bc57f9907";
 
   const requestAccount = async () => {
     const accns = await window.ethereum.request({
