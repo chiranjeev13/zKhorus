@@ -97,7 +97,7 @@ export default function AppProvider({ children }) {
 
     try {
       const tx = await axios.get(
-        `http://localhost:3000/api/relayer?fullProof=${JSON.stringify(
+        `https://z-khorus.vercel.app/api/relayer?fullProof=${JSON.stringify(
           fullProof
         )}&proposalId=${proposalId}&vote=${vote}&groupId=${parseInt(
           group.id
