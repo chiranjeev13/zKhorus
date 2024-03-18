@@ -86,7 +86,9 @@ export default function AppProvider({ children }) {
     });
 
     const group = new Group(groupId._hex, 16);
-    group.addMember(arr);
+    arr.map((a) => {
+      group.addMember(a);
+    });
 
     const fullProof = await Proof.generateProof(
       identity,
