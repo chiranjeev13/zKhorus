@@ -40,7 +40,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: "HCWYWD65RIXPZHT7W72T3TF3649USY9W56",
+    apiKey: "9P38ZVKJTEEGJ2W15G9CFCA37S5CH4XZHT",
     customChains: [
       {
         network: "scrollSepolia",
