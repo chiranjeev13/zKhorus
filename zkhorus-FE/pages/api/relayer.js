@@ -4,7 +4,8 @@ const { ethers } = require("ethers");
 const abi = require("../../zKhorus.json");
 
 export default async function handler(req, res) {
-  var { fullProof, proposalId, vote, groupId, contractAddress } = req.query;
+  var { fullProof, proposalId, vote, groupId, contractAddress, name } =
+    req.query;
 
   const client = new Defender({
     apiKey: process.env.apiKey,
@@ -23,6 +24,7 @@ export default async function handler(req, res) {
 
     const tx = await newsignedContract.voteOnproposal(
       proposalId - 1,
+      name,
       vote,
       fullProof.merkleTreeRoot,
       fullProof.nullifierHash,
