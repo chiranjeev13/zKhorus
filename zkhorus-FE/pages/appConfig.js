@@ -107,7 +107,7 @@ export default function AppProvider({ children }) {
         window.confirm("VOTE CONFIRMED VIA zkPs.Click Ok to view the Reciept")
       ) {
         console.log(tx.data);
-        window.location.href = `https://sepolia.scrollscan.com/tx/${tx.data.hash}`;
+        window.location.href = `https://mumbai.polygonscan.com/tx/${tx.data.hash}`;
       }
     } catch (error) {
       alert(error.response.data.reason);
