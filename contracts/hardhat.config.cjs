@@ -18,7 +18,7 @@ module.exports = {
       chainId: 1337,
     },
     mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com",
+      url: "https://polygon-mumbai-bor-rpc.publicnode.com	",
       accounts: [process.env.PRIVATE_KEY],
       blockConfirmations: 6,
       chainId: 80001,

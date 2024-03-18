@@ -93,7 +93,6 @@ contract zKhorus {
         regtime
         )
     );
-    
     ISemaphore(semaphoreAddress).createGroup(groupId, depth, address(this));
   }
 

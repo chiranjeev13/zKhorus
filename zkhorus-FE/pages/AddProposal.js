@@ -28,7 +28,7 @@ const AddProposal = () => {
     try {
       await AddProposal(title, time);
     } catch (error) {
-      alert(error.error.data.message);
+      alert(error);
     }
   };
 
