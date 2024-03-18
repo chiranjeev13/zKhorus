@@ -68,7 +68,18 @@ export default function AppProvider({ children }) {
     return Registered;
   };
 
-  const VoteOnproposal = async (proposalId, vote) => {
+  const candidateName = async (name) => {
+    const ABI = abi.abi;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const newsignedContract = new ethers.Contract(contractAddress, ABI, signer);
+    const candidateName = await newsignedContract.candidateName(name);
+    console.log(candidateName._hex);
+    return candidateName;
+  };
+
+  const VoteOnproposal = async (name, proposalId, vote) => {
+    console.log(name);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const digest = await axios.get(
@@ -103,7 +114,7 @@ export default function AppProvider({ children }) {
           fullProof
         )}&proposalId=${proposalId}&vote=${vote}&groupId=${parseInt(
           group.id
-        )}&contractAddress=${contractAddress}`
+        )}&contractAddress=${contractAddress}&name=${name}`
       );
       if (
         window.confirm("VOTE CONFIRMED VIA zkPs.Click Ok to view the Reciept")
@@ -124,7 +135,7 @@ export default function AppProvider({ children }) {
     groupId++;
     console.log(groupId);
     if (groupId === 1) {
-      groupId = 1568;
+      groupId = 1789;
     }
     const tx = await newsignedContract.addProposal(
       title,
@@ -157,6 +168,7 @@ export default function AppProvider({ children }) {
           proposalData,
           AddProposal,
           VoteOnproposal,
+          candidateName,
         }}
       >
         {children}

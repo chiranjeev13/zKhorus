@@ -12,9 +12,25 @@ function Dashboard() {
     proposalData,
     AddProposal,
     VoteOnproposal,
+    candidateName,
   } = useContext(Account);
 
-  console.log(proposalData);
+  var Names = [
+    "Jheyanth",
+    "aakriti",
+    "Vikranth Jagdish",
+    "Gunjana Sahoo",
+    "S.Nihaarikha",
+    "Nivedita Lakshminarayanan",
+    "Sreecharan",
+    "Mohammed Farhan",
+    "Puneet",
+    "Surith L G",
+  ];
+
+  const a = async (name) => {
+    candidateName(name);
+  };
 
   return (
     <div className={styles.container}>
@@ -60,25 +76,20 @@ function Dashboard() {
                 <p>Proposal Id - {parseInt(proposal[0]._hex)}</p>
                 <p>Proposal Title - {proposal[1]}</p>
                 <div className={styles.votes}>
-                  <button
-                    onClick={(e) =>
-                      VoteOnproposal(parseInt(proposal[0]._hex), 1)
-                    }
-                  >
-                    Yes
-                  </button>
-                  <button
-                    onClick={() =>
-                      VoteOnproposal(parseInt(proposal[0]._hex), 0)
-                    }
-                  >
-                    No
-                  </button>
+                  {Names.map((a) => (
+                    <>
+                      <p>{a}</p>
+                      <button className={styles.yes}
+                        onClick={(e) =>
+                          VoteOnproposal(a,parseInt(proposal[0]._hex), 1)
+                        }
+                      >
+                        Yes
+                      </button>
+                    </>
+                  ))}
                 </div>
-                <div className={styles.votesBox}>
-                  <p>For Votes : {parseInt(proposal[3]._hex)}</p>
-                  <p>Against Votes : {parseInt(proposal[4]._hex)}</p>
-                </div>
+                <div className={styles.votesBox}></div>
                 <div className={styles.votesBox}>
                   <p>
                     Time Initiated :{" "}
@@ -105,10 +116,7 @@ function Dashboard() {
                 <p>Proposal Id - {parseInt(proposal[0]._hex)}</p>
                 <p>Proposal Title - {proposal[1]}</p>
 
-                <div className={styles.votesBox}>
-                  <p>For Votes : {parseInt(proposal[3]._hex)}</p>
-                  <p>Against Votes : {parseInt(proposal[4]._hex)}</p>
-                </div>
+                <div className={styles.votesBox}></div>
                 <div className={styles.votesBox}>
                   <p>
                     Time Initiated :{" "}
