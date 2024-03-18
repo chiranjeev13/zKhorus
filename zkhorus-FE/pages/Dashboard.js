@@ -60,10 +60,10 @@ function Dashboard() {
         <div className={styles.userInfo}>UNIVERSAL RELAYER ADDRESS</div>
         <a
           className={styles.wallet}
-          href="https://sepolia.scrollscan.com/address/0x82c65626C032Fd234875047557404d9e9b603012"
+          href="https://mumbai.polygonscan.com/address/0x40d94d2ddc038142133ee911d2d00bd69e8acfdc"
           target="_blank"
         >
-          0x82c65626C032Fd234875047557404d9e9b603012
+          0x40d94d2ddC038142133Ee911d2d00bd69E8ACFDC
         </a>
       </div>
 
@@ -79,9 +79,10 @@ function Dashboard() {
                   {Names.map((a) => (
                     <>
                       <p>{a}</p>
-                      <button className={styles.yes}
+                      <button
+                        className={styles.yes}
                         onClick={(e) =>
-                          VoteOnproposal(a,parseInt(proposal[0]._hex), 1)
+                          VoteOnproposal(a, parseInt(proposal[0]._hex), 1)
                         }
                       >
                         Yes
@@ -90,21 +91,7 @@ function Dashboard() {
                   ))}
                 </div>
                 <div className={styles.votesBox}></div>
-                <div className={styles.votesBox}>
-                  <p>
-                    Time Initiated :{" "}
-                    {moment
-                      .unix(parseInt(proposal[8]._hex))
-                      .format("YYYY-MM-DD HH:mm:ss")}
-                  </p>
-                  <p>
-                    Time Left From Initiation :{" "}
-                    {console.log(parseInt(proposal[10]._hex))}
-                    {moment
-                      .unix(parseInt(proposal[10]._hex))
-                      .format("YYYY-MM-DD HH:mm:ss")}
-                  </p>
-                </div>
+                <div className={styles.votesBox}></div>
               </div>
             ))}
         </section>
