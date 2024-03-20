@@ -13,10 +13,24 @@ export default function AppProvider({ children }) {
   const [providerConnected, setProviderConnected] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
+  const [rank, setRank] = useState([]);
   const [error, setError] = useState("");
   const [proposalData, setProposalData] = useState([]);
   const ABI = abi.abi;
   const contractAddress = "0xBf8689B091A42a3cFdB97134706BE50E1C18fe4B";
+
+  var Names = [
+    "Jheyanth",
+    "aakriti",
+    "Vikranth Jagdish",
+    "Gunjana Sahoo",
+    "S.Nihaarikha",
+    "Nivedita Lakshminarayanan",
+    "Sreecharan",
+    "Mohammed Farhan",
+    "Puneet",
+    "Surith L G",
+  ];
 
   const requestAccount = async () => {
     const accns = await window.ethereum.request({
@@ -55,6 +69,7 @@ export default function AppProvider({ children }) {
   useEffect(() => {
     getProposals();
     connectWallet();
+    candidateName(Names);
   }, [providerConnected]);
 
   const IsRegistered = async () => {
@@ -68,18 +83,24 @@ export default function AppProvider({ children }) {
     return Registered;
   };
 
-  const candidateName = async (name) => {
+  const candidateName = async (Names) => {
     const ABI = abi.abi;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const newsignedContract = new ethers.Contract(contractAddress, ABI, signer);
-    const candidateName = await newsignedContract.candidateName(name);
-    console.log(candidateName._hex);
-    return candidateName;
+    var arr = [];
+    var nam = {};
+    for (const name of Names) {
+      const candidateInfo = {
+        name,
+        votes: (await newsignedContract.candidateName(name))._hex,
+      };
+      arr.push(candidateInfo);
+    }
+    setRank(arr);
   };
 
   const VoteOnproposal = async (name, proposalId, vote) => {
-    console.log(name);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const digest = await axios.get(
@@ -169,6 +190,7 @@ export default function AppProvider({ children }) {
           AddProposal,
           VoteOnproposal,
           candidateName,
+          rank,
         }}
       >
         {children}

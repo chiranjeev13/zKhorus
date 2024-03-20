@@ -13,6 +13,7 @@ function Dashboard() {
     AddProposal,
     VoteOnproposal,
     candidateName,
+    rank,
   } = useContext(Account);
 
   var Names = [
@@ -27,10 +28,6 @@ function Dashboard() {
     "Puneet",
     "Surith L G",
   ];
-
-  const a = async (name) => {
-    candidateName(name);
-  };
 
   return (
     <div className={styles.container}>
@@ -96,27 +93,12 @@ function Dashboard() {
             ))}
         </section>
         <section className={styles.closedProposalSection}>
-          {proposalData
-            .filter((x) => x[7] === false)
-            .map((proposal, index) => (
-              <div className={styles.proposalBoxComplete}>
-                <p>Proposal Id - {parseInt(proposal[0]._hex)}</p>
-                <p>Proposal Title - {proposal[1]}</p>
-
-                <div className={styles.votesBox}></div>
-                <div className={styles.votesBox}>
-                  <p>
-                    Time Initiated :{" "}
-                    {moment
-                      .unix(parseInt(proposal[8]._hex))
-                      .format("YYYY-MM-DD HH:mm:ss")}
-                  </p>
-                  <p>
-                    Time Left From Initiation <b>CLOSED</b>
-                  </p>
-                </div>
-              </div>
-            ))}
+          {rank.map((a) => (
+            <>
+              <div className={styles.votes}>{a.name}</div>
+              <div>{parseInt(a.votes)}</div>
+            </>
+          ))}
         </section>
       </div>
     </div>
